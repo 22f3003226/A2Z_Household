@@ -1,0 +1,111 @@
+{% extends "base.html" %} {% block remtitle %}Customer Dashboard {% endblock %} {% block container %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Customer Dashboard ({{session.user_name}})</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/customer_dashboard"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/customer_dashboard/search">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/customer_dashboard/summary">Summary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% endblock %} 
+    {% block content %}
+    <h1 class="text-center mt-5">Available Services</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for service in services %}
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{service.service_name}}</h5>
+            <p class="card-text">{{service.service_description}}</p>
+            <p class="card-text">Base Price: {{service.base_price}}</p>
+            <p class="card-text">Time Required: {{service.time_required}}</p>
+            <div class="d-flex justify-content-end">
+              <a href="/customer_dashboard/create_request/{{service.id}}" class="btn btn-primary"
+                >Create Request</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h1 class="text-center mt-5">Service History</h1>
+    {% if service_history %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Sr. No.</th>
+          <th>Service Name</th>
+          <th>Service Description</th>
+          <th>Service Professional</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for req in service_history %}
+        <tr>
+          <td>{{loop.index}}</td>
+          <td>{{req.service.service_name}}</td>
+          <td>{{req.description}}</td>
+          <td>{{req.service_proffessional.user_name}}</td>
+          <td>{{req.status}}</td>
+          <td>
+            {% if req.status == 'accepted' %}
+            <a href="/customer_dashboard/close_request/{{req.id}}" class="btn btn-success"
+              >Close Request</a
+            >
+            {% elif req.status == 'pending' %}
+            <a href="/customer_dashboard/edit_request/{{req.id}}" class="btn btn-info">Edit Request</a>
+            <a href="/customer_dashboard/delete_request/{{req.id}}" class="btn btn-danger">Delete Request</a>
+            {% else %}
+            <p>All requests serviced</p>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No services requested yet.</p>
+    {% endif %}
+
+    {% endblock %}

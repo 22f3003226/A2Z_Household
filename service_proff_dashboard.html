@@ -1,0 +1,145 @@
+{% extends "base.html" %} {% block remtitle %}Service Proff Dashboard {% endblock %} {% block container %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Serice Proffesional Dashboard ({{session.user_name}})</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/service_proff_dashboard"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/service_proff_dashboard/search">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/service_proff_dashboard/summary">Summary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <li><a href="/service_proff_dashboard/edit_service" class="btn btn-warning">Edit Service</a></li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    {% endblock %} 
+    {% block content %}
+    
+    <h3 class="mt-5">Pending Requests</h3>
+    {% if pending_requests %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer User Name</th>
+          <th>Pincode</th>
+          <th>Address</th>
+          <th>Service Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in pending_requests %}
+        <tr>
+          <td>{{request.customer.user_name}}</td>
+          <td>{{request.customer.pincode}}</td>
+          <td>{{request.customer.address}}</td>
+          <td>{{request.service.service_name}}</td>
+          <td>
+            <a
+              href="/service_proff_dashboard/accept_request/{{request.id}}"
+              class="btn btn-success"
+              >Accept</a
+            >
+            <a
+              href="/service_proff_dashboard/reject_request/{{request.id}}"
+              class="btn btn-danger"
+              >Reject</a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No pending requests available</p>
+    {% endif %}
+
+    <h3 class="mt-5">Accepted Requests</h3>
+    {% if accepted_requests %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer User Name</th>
+          <th>Pincode</th>
+          <th>Address</th>
+          <th>Service Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in accepted_requests %}
+        <tr>
+          <td>{{request.customer.user_name}}</td>
+          <td>{{request.customer.pincode}}</td>
+          <td>{{request.customer.address}}</td>
+          <td>{{request.service.service_name}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No requests accepted yet</p>
+    {% endif %}
+
+    <h3 class="mt-5">Closed Requests</h3>
+    {% if closed_requests %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Customer User Name</th>
+          <th>Pincode</th>
+          <th>Address</th>
+          <th>Service Name</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for request in closed_requests %}
+        <tr>
+          <td>{{request.customer.user_name}}</td>
+          <td>{{request.customer.pincode}}</td>
+          <td>{{request.customer.address}}</td>
+          <td>{{request.service.service_name}}</td>
+          <td>{{request.rating_by_customer}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="text-center">No requests serviced yet</p>
+    {% endif %}
+
+    {% endblock %}

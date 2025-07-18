@@ -1,0 +1,98 @@
+.flash-messages {
+    margin-top: 20px;
+}
+
+.alert{
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.btn-custom {
+    background-color: #33d9c6; /* Green */
+    border: none;
+    border-radius: 15px;
+    color: rgb(135, 14, 14);
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 2px;
+    cursor: pointer;
+}
+
+.btn-custom-2{
+    background-color: #e02df4; /* Green */
+    border: none;
+    border-radius: 15px;
+    color: rgb(95, 250, 232);
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 2px;
+    cursor: pointer;
+}
+
+.gradient-custom {
+    background: #9342e9;
+    background: -webkit-linear-gradient(to right, hsl(33, 95%, 64%), rgb(235, 74, 210));
+    background: linear-gradient(to right, hsl(205, 51%, 38%), rgb(172, 28, 255))
+}
+
+.gradient-custom-2 {
+    background: #0ad3fa;
+    background: -webkit-linear-gradient(to right, hsla(32, 92%, 47%, 0.779), #2457a9);
+    background: linear-gradient(to right, #e957ae, #0edae9)
+}
+.gradient-custom-3 {
+    background: #a1ed5a;
+    background: -webkit-linear-gradient(to right, hsl(191, 80%, 65%), rgb(255, 75, 171));
+    background: linear-gradient(to right, hsl(33, 92%, 67%), rgb(18, 238, 95))
+}
+.gradient-custom-4 {
+    background: #a1ed5a;
+    background: -webkit-linear-gradient(to right, hsl(252, 82%, 55%), rgb(16, 84, 230));
+    background: linear-gradient(to right, hsl(283, 78%, 55%), rgb(18, 238, 95))
+}
+.gradient-custom-5 {
+    background: #a1ed5a;
+    background: -webkit-linear-gradient(to right, hsl(252, 82%, 55%), rgb(16, 84, 230));
+    background: linear-gradient(to right, hsl(283, 78%, 55%), rgb(18, 238, 95))
+}
+.gradient-custom-6 {
+    background: #a1ed5a;
+    background: -webkit-linear-gradient(to right, hsl(212, 82%, 55%), rgb(32, 159, 232));
+    background: linear-gradient(to right, hsl(170, 70%, 57%), rgb(235, 52, 165))
+}
+
+.gradient-custom-7 {
+    background: #e932609d;
+    background: -webkit-linear-gradient(to right, hsl(36, 82%, 55%), rgb(155, 32, 232));
+    background: linear-gradient(to right, hsl(210, 83%, 51%), rgb(42, 210, 129))
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+.form-group label {
+    margin-right: 1rem;
+}
